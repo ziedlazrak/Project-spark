@@ -1,0 +1,18 @@
+/* [DUMMY PAGE STYLES] */
+/* YOU CAN DISCARD THESE IF YOU WANT */
+
+
+/* [THE STARS] */
+.stars{
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  background-image: url('../img/stars-blank.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+.stars.over{
+  background-image: url('../img/stars.png');
+}

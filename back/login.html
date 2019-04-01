@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="Dashboard">
+  <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+  <title>Dashio - Bootstrap Admin Template</title>
+
+  <!-- Favicons -->
+  <link href="img/favicon.png" rel="icon">
+  <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Bootstrap core CSS -->
+  <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!--external css-->
+  <link href="lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
+  <!-- Custom styles for this template -->
+  <link href="css/style.css" rel="stylesheet">
+  <link href="css/style-responsive.css" rel="stylesheet">
+
+</head>
+
+<body>
+  <!-- **********************************************************************************************************************************************************
+      MAIN CONTENT
+      *********************************************************************************************************************************************************** -->
+     <div class="container">
+         <form class="form-login" action="index.html">
+        <h2>Login</h2>
+        <p>Please fill in your credentials to login.</p>
+        <form action="" method="post">
+            <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
+                <label>Username</label>
+                <input type="text" name="username" class="form-control" value="<?php if(isset($_COOKIE["username"])) { echo $_COOKIE["username"]; } else {echo $username;} ?>">
+                <span class="help-block"><?php echo $username_err; ?></span>
+            </div>    
+            <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
+                <label>Password</label>
+                <input type="password" name="password" class="form-control" value="<?php if(isset($_COOKIE["password"])) { echo $_COOKIE["password"];}?>">
+                <span class="help-block"><?php echo $password_err; ?></span>
+            </div>
+            <input type="checkbox" name="rememberme" id="remembercheckbox" <?php if(isset($_COOKIE["username"])) { ?> checked <?php } ?> /><label for="remembercheckbox">Remember me</label>
+            <input type="checkbox" name="stayloggedin" id="stayloggedin" <?php if(isset($_COOKIE["usernameonline"])) { ?> checked <?php } ?> /><label for="stayloggedin">Stay logged in</label>
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="Login">
+                <input type="btn-primary" class="btn btn-primary" onclick="window.location = '<?php echo $loginURL ?>';" value="Login with Google">
+            </div>
+            <p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
+            <p><a href="forgotpassword.php">Forgot your password ?</a></p>
+        </form>
+        </form>
+    </div>
+  <script src="lib/jquery/jquery.min.js"></script>
+  <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+  <!--BACKSTRETCH-->
+  <!-- You can use an image of whatever size. This script will stretch to fit in any screen size.-->
+  <script type="text/javascript" src="lib/jquery.backstretch.min.js"></script>
+  <script>
+    $.backstretch("img/login-bg.jpg", {
+      speed: 500
+    });
+  </script>
+</body>
+
+</html>
