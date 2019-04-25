@@ -1,14 +1,150 @@
 <?php
 // Initialize the session
-session_start();
- /*
+include "../core/usersC.php";
+$bdd = new PDO('mysql:host=localhost;dbname=try', 'root', '');
+
+ 
 // Check if the user is logged in, if not then redirect him to login page
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-    header("location: login.php");
-    exit;
-    
+    header("location: ../views/login.php");
+    exit;   
 }
-*/
+
+      setcookie ("currentusername",$_SESSION["nom"],time()+ (10 * 365 * 24 * 60 * 60));
+
+      $users2=new usersC();
+     $name1=$users2->select1();
+     $name2=$users2->select2();
+     $name3=$users2->select3();
+     $name4=$users2->select4();
+
+     $act1=$users2->selectact1();
+     $act2=$users2->selectact2();
+     $act3=$users2->selectact3();
+     $act4=$users2->selectact4();
+
+     $date1=$users2->selectdate1();
+     $date2=$users2->selectdate2();
+     $date3=$users2->selectdate3();
+     $date4=$users2->selectdate4();
+
+     foreach ($name1 as $row) {
+      $username=$row["username"];
+     }
+
+     foreach ($name2 as $row) {
+      $username2=$row["username"];
+     }
+
+     foreach ($name3 as $row) {
+      $username3=$row["username"];
+     }
+
+     foreach ($name4 as $row) {
+      $username4=$row["username"];
+     }
+
+
+     foreach ($act1 as $row) {
+      $act11=$row["activity"];
+     }
+
+     foreach ($act2 as $row) {
+      $act12=$row["activity"];
+     }
+
+     foreach ($act3 as $row) {
+      $act13=$row["activity"];
+     }
+
+     foreach ($act4 as $row) {
+      $act14=$row["activity"];
+     }
+
+
+     foreach ($date1 as $row) {
+      $date11=$row["created_at"];
+     }
+
+     foreach ($date2 as $row) {
+      $date12=$row["created_at"];
+     }
+
+     foreach ($date3 as $row) {
+      $date13=$row["created_at"];
+     }
+
+     foreach ($date4 as $row) {
+      $date14=$row["created_at"];
+     }
+
+
+     $stat1=$users2->selectstat1();
+     $stat2=$users2->selectstat2();
+     $stat3=$users2->selectstat3();
+     $stat4=$users2->selectstat4();
+     $stat5=$users2->selectstat5();
+     $stat6=$users2->selectstat6();
+     $stat7=$users2->selectstat7();
+     $stat8=$users2->selectstat8();
+     $stat9=$users2->selectstat9();
+     $stat10=$users2->selectstat10();
+     $stat11=$users2->selectstat11();
+
+     foreach ($stat1 as $row) {
+      $statt1=$row["STUFF"];
+     }
+     foreach ($stat2 as $row) {
+      $statt2=$row["STUFF"];
+     }
+     foreach ($stat3 as $row) {
+      $statt3=$row["STUFF"];
+     }
+     foreach ($stat4 as $row) {
+      $statt4=$row["STUFF"];
+     }
+     foreach ($stat5 as $row) {
+      $statt5=$row["STUFF"];
+     }
+     foreach ($stat6 as $row) {
+      $statt6=$row["STUFF"];
+     }
+     foreach ($stat7 as $row) {
+      $statt7=$row["STUFF"];
+     }
+     foreach ($stat8 as $row) {
+      $statt8=$row["STUFF"];
+     }
+     foreach ($stat9 as $row) {
+      $statt9=$row["STUFF"];
+     }
+     foreach ($stat10 as $row) {
+      $statt10=$row["STUFF"];
+     }
+     foreach ($stat11 as $row) {
+      $statt11=$row["STUFF"];
+     }
+
+     $me=$_SESSION["id"];
+     $numnot=$users2->numbernotif($me);
+
+    foreach ($numnot as $row) {
+      $numbernotif=$row["NUM"];
+     }     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -136,14 +272,15 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
           <li id="header_inbox_bar" class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
               <i class="fa fa-envelope-o"></i>
-              <span class="badge bg-theme">5</span>
+              <span class="badge bg-theme"><?php echo $numbernotif ?></span>
               </a>
             <ul class="dropdown-menu extended inbox">
               <div class="notify-arrow notify-arrow-green"></div>
               <li>
-                <p class="green">You have 5 new messages</p>
+                <p class="green">You have <?php echo $numbernotif ?> new messages</p>
               </li>
               <li>
+
                 <a href="index.html#">
                   <span class="photo"><img alt="avatar" src="img/ui-zac.jpg"></span>
                   <span class="subject">
@@ -260,8 +397,9 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
       <div id="sidebar" class="nav-collapse ">
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
-          <p class="centered"><img src="<?php echo 'images/' . $_SESSION["picture"] ?>" width="80" height="80" alt="" class="img-circle"></a></p>
+          <p class="centered"><img src="<?php echo '../views/images/' . $_SESSION["picture"] ?>" width="80" height="80" alt="" class="img-circle"></a></p>
           <h5 class="centered"><b><?php echo ($_SESSION["nom"]); ?></b></h5>
+          <h4><b><?php echo htmlspecialchars($_SESSION["email"]); ?></b></h4>
           <li class="mt">
             <a class="active" href="index.html">
               <i class="fa fa-dashboard"></i>
@@ -302,7 +440,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
           </li>
 
           <li class="sub-menu">
-            <a href="cours.html">
+            <a href="cours.php">
               <i class="fa fa-desktop"></i>
               <span>Cours</span>
               </a>
@@ -347,7 +485,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
               </a>
             <ul class="sub">
               <li><a href="lobby.html">Lobby</a></li>
-              <li><a href="chat_room.html"> Chat Room</a></li>
+              <li><a href="chat_room.php"> Chat Room</a></li>
             </ul>
           </li>
           <li>
@@ -621,7 +759,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                     <strong>$ 890,00 | 15%</strong>
                   </div>
                   <br>
-                  <div class="sparkline" data-type="line" data-resize="true" data-height="75" data-width="90%" data-line-width="1" data-line-color="#fff" data-spot-color="#fff" data-fill-color="" data-highlight-line-color="#fff" data-spot-radius="4" data-data="[200,135,667,333,526,996,564,123,890,564,455]"></div>
+                  <div class="sparkline" data-type="line" data-resize="true" data-height="75" data-width="90%" data-line-width="1" data-line-color="#fff" data-spot-color="#fff" data-fill-color="" data-highlight-line-color="#fff" data-spot-radius="4" data-data="[<?php echo $statt1 ?>,<?php echo $statt2 ?>,<?php echo $statt3 ?>,<?php echo $statt4 ?>,<?php echo $statt5 ?>,<?php echo $statt6 ?>,<?php echo $statt7 ?>,<?php echo $statt8 ?>,<?php echo $statt9 ?>,<?php echo $statt10 ?>,<?php echo $statt11 ?>]"></div>
                 </div>
               </div>
             </div>
@@ -635,9 +773,9 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
               </div>
               <div class="details">
                 <p>
-                  <muted>Just Now</muted>
+                  <muted><?php echo $date11 ?></muted>
                   <br/>
-                  <a href="#">Paul Rudd</a> purchased an item.<br/>
+                  <a href="#"><?php echo $username ?></a> <?php echo $act11 ?><br/>
                 </p>
               </div>
             </div>
@@ -648,9 +786,9 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
               </div>
               <div class="details">
                 <p>
-                  <muted>2 Minutes Ago</muted>
+                  <muted><?php echo $date12 ?></muted>
                   <br/>
-                  <a href="#">James Brown</a> subscribed to your newsletter.<br/>
+                  <a href="#"><?php echo $username2 ?></a> <?php echo $act12 ?> <br/>
                 </p>
               </div>
             </div>
@@ -661,9 +799,9 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
               </div>
               <div class="details">
                 <p>
-                  <muted>3 Hours Ago</muted>
+                  <muted><?php echo $date13 ?></muted>
                   <br/>
-                  <a href="#">Diana Kennedy</a> purchased a year subscription.<br/>
+                  <a href="#"><?php echo $username3 ?></a> <?php echo $act13 ?><br/>
                 </p>
               </div>
             </div>
@@ -674,9 +812,9 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
               </div>
               <div class="details">
                 <p>
-                  <muted>7 Hours Ago</muted>
+                  <muted><?php echo $date14 ?></muted>
                   <br/>
-                  <a href="#">Brando Page</a> purchased a year subscription.<br/>
+                  <a href="#"><?php echo $username4 ?></a> <?php echo $act14 ?><br/>
                 </p>
               </div>
             </div>
@@ -734,11 +872,11 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     $(document).ready(function() {
       var unique_id = $.gritter.add({
         // (string | mandatory) the heading of the notification
-        title: 'Welcome to Dashio!',
+        title: "Bonjour <?php echo ($_SESSION["nom"]); ?> !",
         // (string | mandatory) the text inside the notification
-        text: 'Hover me to enable the Close Button. You can hide the left sidebar clicking on the button next to the logo.',
+        text: 'Nous utilisons des cookies pour nous permettre de mieux comprendre comment le site est utilisé. En continuant à utiliser ce site, vous acceptez cette politique.',
         // (string | optional) the image to display on the left
-        image: 'img/ui-sam.jpg',
+        image: "<?php echo '../views/images/' . $_SESSION["picture"] ?>",
         // (bool | optional) if you want it to fade out on its own or just sit there
         sticky: false,
         // (int | optional) the time you want it to be alive for before fading out

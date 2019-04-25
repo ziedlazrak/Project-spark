@@ -110,7 +110,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
       <div id="left1">
         <div id="signin1">
           <div class="logo1">
-            <img src="https://image.ibb.co/hW1YHq/login-logo.png" alt="Sluralpright" />
+            <img src="https://i.ibb.co/HFGs3NL/h.png" alt="Sluralpright" />
           </div>
     
 
@@ -133,52 +133,22 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         </form>
     </div>
     </div>  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-        <footer id="main-footer1">
-          <p>Copyright &copy; 2018, Sluralpright All Rights Reserved</p>
-          <div>
-            <a href="#">terms of use</a> | <a href="#">Privacy Policy</a>
+</div>
+</div>
+</div>
+<div id="right1">
+        <div id="showcase1">
+          <div class="showcase-content1">
+            <h1 class="showcase-text1">
+              Les écuries de <strong>Mornag</strong>
+            </h1>
+            <a href="../horseclub/views/index.php" class="secondary-btn1">Visiter le site officiel</a>
           </div>
-        </footer>
+        </div>
       </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</div>
+</body>
+</html>
 
 
 

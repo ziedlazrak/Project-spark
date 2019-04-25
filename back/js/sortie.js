@@ -1,28 +1,23 @@
+	document.getElementById("ajout").style.display='none';
+	document.getElementById("verif").style.display='block';	
 function verif(){
 	console.log("log");
 	var nom = document.getElementById("nom").value;
-	var nbre = document.getElementById("nbre").value;
-	var lieu = document.getElementById("lieu").value;
+	var nbre = document.getElementById("lieu").value;
+	var lieu = document.getElementById("date").value;
 	var prix = document.getElementById("prix").value;
 
-	if((nom=="") || (nbre=="") || (lieu=="") || (prix==""))
+	if((nom=="") || (lieu=="") || (date=="") || (prix==""))
 	{
 		swal("Veuillez verifier votre choix");
 		return
 	}
-	if(nbre>=50){
-		swal("Nombre de participants elevé");
-		return
-	}
 	else{
 		swal("sucées", "Sortie ajoutée", "success");
+		document.getElementById("verif").style.display='none';
+		document.getElementById("ajout").style.display='block';
 	}
 
 
 }
 
-
-nom
-nbre
-lieu
-prix

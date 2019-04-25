@@ -36,12 +36,12 @@
       <div id="left1">
         <div id="signin1">
           <div class="logo1">
-            <img src="https://image.ibb.co/hW1YHq/login-logo.png" alt="Sluralpright" />
+            <img src="https://i.ibb.co/HFGs3NL/h.png" alt="Sluralpright" />
           </div>
         <div class="wrapper">
           <div class="wrapper">
-            <h2>Password recovery</h2>
-            <p>Choose a method to recover your password</p>
+            <label style="font-size: 32px;">Password recovery </label>
+            <label style="font-size: 13px;">Choose a method to recover your password </label>
             <form action="" method="post">
               <div class="form-group">
                 <button class="btn1"><a style=text-decoration:none; href="forgotpasswordparmail.php">By email</button>
@@ -55,12 +55,7 @@
         </div>    
 
 
-        <footer id="main-footer1">
-          <p>Copyright &copy; 2018, Sluralpright All Rights Reserved</p>
-          <div>
-            <a href="#">terms of use</a> | <a href="#">Privacy Policy</a>
-          </div>
-        </footer>
+
       </div>
 
       <div id="right1">
@@ -69,7 +64,7 @@
             <h1 class="showcase-text1">
               Les écuries de <strong>Mornag</strong>
             </h1>
-            <a href="#" class="secondary-btn1">Visiter le site officiel</a>
+            <a href="../horseclub/views/index.php" class="secondary-btn1">Visiter le site officiel</a>
           </div>
         </div>
       </div>

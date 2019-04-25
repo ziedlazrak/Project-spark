@@ -1,3 +1,61 @@
+<?php
+include "../core/usersC.php";
+$bdd = new PDO('mysql:host=localhost;dbname=try', 'root', '');
+
+if(isset($_POST['envoi_message'])){
+
+
+
+  if(isset($_POST['destinataire'],$_POST['message']) AND !empty($_POST['destinataire']) AND !empty($_POST['message'])) {
+         $destinataire = htmlspecialchars($_POST['destinataire']);
+         $message = htmlspecialchars($_POST['message']);
+         $id_destinataire = $bdd->prepare('SELECT id FROM users WHERE id = ?');
+         $id_destinataire->execute(array($destinataire));
+         $dest_exist = $id_destinataire->rowCount();
+         if($dest_exist >0) {
+            $id_destinataire = $id_destinataire->fetch();
+            $id_destinataire = $id_destinataire['id'];
+            $ins = $bdd->prepare('INSERT INTO messages(id_expediteur,id_destinataire,message) VALUES (?,?,?)');
+            $ins->execute(array($_SESSION['id'],$id_destinataire,$message))or die('probleme base messages');
+            $error = "Votre message a bien été envoyé !";
+
+            $status="unread";
+            $ins1 = $bdd->prepare('INSERT INTO notifications(name,message,status) VALUES (:name,:message,:status)');
+            $ins1->bindValue(':name',$id_destinataire);
+            $ins1->bindValue(':message',$message);
+            $ins1->bindValue(':status',$status);
+            $ins1->execute() or die('probleme base notifications');
+
+         } else {
+            $error = "Cet utilisateur n'existe pas...";
+         }
+      } else {
+      header("location:moi.php");
+         $error = "Veuillez compléter tous les champs";
+      }
+
+
+
+}
+$destinataires = $bdd->query('SELECT username,id FROM users ORDER BY username');
+
+$dest=-1;
+$msg=-1; 
+$msg_nbr =-1;
+$verifier=0;
+if(isset($_POST['destinataire'])){
+  $dest=$_POST['destinataire'];
+  $msg = $bdd->query('SELECT * FROM messages WHERE (id_destinataire='.intval($_SESSION['id']).' and id_expediteur ='.intval($dest).') OR (id_destinataire='.intval($dest).' and id_expediteur ='.intval($_SESSION['id']).') ORDER BY id');
+$msg_nbr = $msg->rowCount();
+$verifier=1;
+}
+
+
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,7 +98,7 @@
         <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
       </div>
       <!--logo start-->
-      <a href="index.html" class="logo"><b>DASH<span>IO</span></b></a>
+      <a href="index.html" class="logo"><b>ADM<span>IN</span></b></a>
       <!--logo end-->
       <div class="nav notify-row" id="top_menu">
         <!--  notification start -->
@@ -229,7 +287,7 @@
       </div>
       <div class="top-menu">
         <ul class="nav pull-right top-menu">
-          <li><a class="logout" href="login.html">Logout</a></li>
+          <li><a class="logout" href="../views/logout.php">Logout</a></li>
         </ul>
       </div>
     </header>
@@ -242,8 +300,9 @@
       <div id="sidebar" class="nav-collapse ">
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
-          <p class="centered"><a href="profile.html"><img src="img/ui-sam.jpg" class="img-circle" width="80"></a></p>
-          <h5 class="centered">Sam Soffes</h5>
+          <p class="centered"><img src="<?php echo '../views/images/' . $_SESSION["picture"] ?>" width="80" height="80" alt="" class="img-circle"></a></p>
+          <h5 class="centered"><b><?php echo ($_SESSION["nom"]); ?></b></h5>
+          <h4><b><?php echo htmlspecialchars($_SESSION["email"]); ?></b></h4>
           <li class="mt">
             <a href="index.html">
               <i class="fa fa-dashboard"></i>
@@ -372,105 +431,69 @@
                 <input type="text" placeholder="Search" class="form-control search-btn ">
               </form>
             </div>
-            <div class="group-rom">
-              <div class="first-part odd">Sam Soffes</div>
-              <div class="second-part">Hi Mark, have a minute?</div>
+            <div style="overflow-y:scroll;height:800px; ">
+            <form method="POST" action="">
+              <?php
+   if($verifier==1){
+    if($msg_nbr == 0) { echo "Vous n'avez aucun message."; }
+   while($m = $msg->fetch()) {
+      $p_exp = $bdd->prepare('SELECT username FROM users WHERE id = ?');
+      $p_exp->execute(array($m['id_expediteur']));
+      $p_exp = $p_exp->fetch();
+      $p_exp = $p_exp['username'];
+      echo '<div class="group-rom">
+              <div class="first-part odd">'.$p_exp.'</div>
+              <div class="second-part">'.$m['message'].'</div>
               <div class="third-part">12:30</div>
-            </div>
-            <div class="group-rom">
-              <div class="first-part">Mark Simmons</div>
-              <div class="second-part">Of course Sam, what you need?</div>
-              <div class="third-part">12:31</div>
-            </div>
-            <div class="group-rom">
-              <div class="first-part odd">Sam Soffes</div>
-              <div class="second-part">I want you examine the new product</div>
-              <div class="third-part">12:32</div>
-            </div>
-            <div class="group-rom">
-              <div class="first-part">Mark Simmons</div>
-              <div class="second-part">Ok, send me the pic</div>
-              <div class="third-part">12:32</div>
-            </div>
-            <div class="group-rom">
-              <div class="first-part odd">Sam Soffes</div>
-              <div class="second-part">
-                <a href="#">product.jpg</a> <span class="text-muted">35.4KB</span>
-                <p><img class="img-responsive" src="img/product.jpg" alt=""></p>
-              </div>
-              <div class="third-part">12:32</div>
-            </div>
-            <div class="group-rom">
-              <div class="first-part">Mark Simmons</div>
-              <div class="second-part">Fantastic job, love it :)</div>
-              <div class="third-part">12:32</div>
-            </div>
-            <div class="group-rom last-group">
-              <div class="first-part odd">Sam Soffes</div>
-              <div class="second-part">Thanks!!</div>
-              <div class="third-part">12:33</div>
-            </div>
-            <footer>
+            </div>';
+   ?>
+   <?php }
+   } ?>
+</div>
+            
+            <footer >
               <div class="chat-txt">
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" name="message">
               </div>
               <div class="btn-group hidden-sm hidden-xs">
                 <button type="button" class="btn btn-white"><i class="fa fa-meh-o"></i></button>
                 <button type="button" class="btn btn-white"><i class=" fa fa-paperclip"></i></button>
               </div>
-              <button class="btn btn-theme">Send</button>
+              <input type="submit" value="Envoyer" name="envoi_message"  />
             </footer>
           </aside>
-          <aside class="right-side">
+          <aside class="right-side" style="height:800px; ">
             <div class="user-head">
               <a href="#" class="chat-tools btn-theme"><i class="fa fa-cog"></i> </a>
               <a href="#" class="chat-tools btn-theme03"><i class="fa fa-key"></i> </a>
             </div>
             <div class="invite-row">
-              <h4 class="pull-left">Team Members</h4>
+              <h4 class="pull-left">Destinataires</h4>
               <a href="#" class="btn btn-theme04 pull-right">+ Invite</a>
+              <?php if(isset($error)) { echo '<span style="color:red">'.$error.'</span>'; } ?>
             </div>
+         <select name="destinataire">
+            <?php while($d = $destinataires->fetch()) { ?>
+            <option value="<?= $d['id'] ?>" <?php
+
+            if(isset($_POST["destinataire"])){
+              if($_POST["destinataire"]==$d['id']){
+                echo "selected='selected' ";
+              }
+            } $d['username'] ?>><?= $d['username'] ?></option>
+            <?php } ?>
+         </select> 
+  <input type="submit" name="valider" value="ok">
             <ul class="chat-available-user">
-              <li>
-                <a href="chat_room.html">
-                  <img class="img-circle" src="img/friends/fr-02.jpg" width="32">
-                  Paul Brown
-                  <span class="text-muted">1h:02m</span>
-                  </a>
-              </li>
-              <li>
-                <a href="chat_room.html">
-                  <img class="img-circle" src="img/friends/fr-05.jpg" width="32">
-                  David Duncan
-                  <span class="text-muted">1h:08m</span>
-                  </a>
-              </li>
-              <li>
-                <a href="chat_room.html">
-                  <img class="img-circle" src="img/friends/fr-07.jpg" width="32">
-                  Laura Smith
-                  <span class="text-muted">1h:10m</span>
-                  </a>
-              </li>
-              <li>
-                <a href="chat_room.html">
-                  <img class="img-circle" src="img/friends/fr-08.jpg" width="32">
-                  Julia Schultz
-                  <span class="text-muted">3h:00m</span>
-                  </a>
-              </li>
-              <li>
-                <a href="chat_room.html">
-                  <img class="img-circle" src="img/friends/fr-01.jpg" width="32">
-                  Frank Arias
-                  <span class="text-muted">4h:22m</span>
-                  </a>
-              </li>
+
+
             </ul>
           </aside>
         </div>
         <!-- page end-->
       </section>
+    
+      </form>
       <!-- /wrapper -->
     </section>
     <!-- /MAIN CONTENT -->

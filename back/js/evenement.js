@@ -1,3 +1,4 @@
+
 	document.getElementById("ajout").style.display='none';
 	document.getElementById("verif").style.display='block';	
 function verif(){
@@ -18,6 +19,7 @@ function verif(){
 	}
 	else{
 		swal("sucées", "Competition ajoutée", "success");
+		
 		document.getElementById("verif").style.display='none';
 		document.getElementById("ajout").style.display='block';
 		

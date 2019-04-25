@@ -3104,7 +3104,7 @@ ul.chat-available-user li a:hover {
 }
 
 .badge.bg-warning {
-    background: #f53e54;
+    background: #f53e54 !important;
 }
 
 .badge.bg-important {

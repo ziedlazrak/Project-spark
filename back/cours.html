@@ -289,7 +289,7 @@
       </div>
       <div class="top-menu">
         <ul class="nav pull-right top-menu">
-          <li><a class="logout" href="login.html">Logout</a></li>
+          <li><a class="logout" href="../views/login.php">Logout</a></li>
         </ul>
       </div>
     </header>
@@ -401,27 +401,7 @@
     <section id="main-content">
       <section class="wrapper">
         <div class="row">
-<!--
-          <div style="background: none;position: absolute;left: 600px;height: 600px;width: 500px;top: 110px;text-align: center;border: 1px solid #000;">
-            <h2 >Formulaire des Cours</h2>
-            <br>
-            <br>
-            <br>
-
-            <input class="form-control" type="text" id="Ref" placeholder="Reference" style="margin-left: 50px;margin-right: 50px;width: 400px;">
-            <input class="form-control" type="number" id="Durée" placeholder="Durée" style="margin-left: 50px;margin-right: 50px;width: 400px;">
-            <input class="form-control" type="text" id="nom" placeholder="Nom du Coach" style="margin-left: 50px;margin-right: 50px;width: 400px;">
-              <input id="check1" type="radio" name="rep2"/>
-              <label for="q0r6">disponible</label> 
-              <input  id="check2" type="radio" name="rep2"/>
-              <label for="q0r7">annulé</label>
-            <br>
-            <br>
-            <br>
-            <button onclick="valid()" style="width: 100px;text-align: center;height: 35px;background-image: -webkit-linear-gradient(0deg, #f45622 0%, #f53e54 100%);border: 1px solid #f53e54;" type="button" class="btn btn-primary" >Valider</button>
-          </div>
--->
-
+<form method="POST" action="ajoutcours.php">
           <div class="main">
             
             <div class="opacity"></div>
@@ -431,34 +411,33 @@
             <h2>Formulaire de Cours</h2>
             <div class="txtb">
               <label>Reference :</label>
-              <input type="text" id="Ref" placeholder="Reference">
+              <input type="text" id="Ref" name="ref_cours" placeholder="Reference">
             </div>
 
             <div class="txtb">
               <label>Durée</label>
-              <input type="number" id="Durée" placeholder="Entrez la Durée du cours ">
+              <input type="number" id="Durée" name="dur_cours"placeholder="Entrez la Durée du cours ">
             </div>
 
 
             <div class="txtb">
               <label>Nom du Coach :</label>
-              <input type="text" id="nom" placeholder="Nom du Coach">
+              <input type="text" id="nom" name="nom_coach" placeholder="Nom du Coach">
             </div>
 
             <div class="txtb">
               <label>Disponibilité du Cours :</label>
-              <input id="check1" type="radio" name="rep2" style="z-index: 1;position: absolute;left: 0px;"/>
+              <input id="check1" type="radio" name="dispo" style="z-index: 1;position: absolute;left: 0px;"/>
               <label for="q0r6" style="z-index: 0;">disponible</label> 
-              <input  id="check2" type="radio" name="rep2" style="z-index: 1;position: absolute;left: 0px;"/>
+              <input  id="check2" type="radio" name="dispo" style="z-index: 1;position: absolute;left: 0px;"/>
               <label for="q0r7" style="z-index: 0;">annulé</label>
             </div>
 
-            <br>
-          <a onclick="verif()" class="btn" id="submit">Envoyez</a>        
+            <br><input type="submit" name="ajouter" value="ajouter">  
           </div>
             </div>
           </div>
-
+</form>
         </div>
         <!-- /row -->
       </section>

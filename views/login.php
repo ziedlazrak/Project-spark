@@ -130,6 +130,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
      <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
      <script src="jquery.vide.js"></script>
 </head>
+<style>
+
+</style>
 <body data-vide-bg="motionplace">
      <div id="wrapper1">
       <div style="z-index: 0;" class="square">
@@ -138,7 +141,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
       <div id="left1">
         <div id="signin1">
           <div class="logo1">
-            <img src="https://image.ibb.co/hW1YHq/login-logo.png" alt="Sluralpright" />
+            <img src="https://i.ibb.co/HFGs3NL/h.png" alt="Sluralpright"" />
           </div>
     
 

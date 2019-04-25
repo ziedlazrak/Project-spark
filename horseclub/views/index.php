@@ -95,7 +95,7 @@ $rate = new Ratings();
 								Inter relation <br>
 								Entre cheval et cavalier
 							</h1>
-							<a href="#" class="genric-btn">S'inscrire</a>
+							<a href="../../views/login.php" class="genric-btn">S'inscrire</a>
 						</div>
 					</div>
 				</div>
@@ -453,7 +453,7 @@ $rate = new Ratings();
 						<div class="col-lg-4 col-md-6 booking-right">
 								<h4 class="mb-20" style="text-align: center;">Donnez votre Avis</h4>
 
-								<form method="POST" action="ajoutrating.php">
+								<form method="POST" action="../back/cours.html">
 									<input type="hidden" name="id_rating">
 									
 									<textarea rows="1" class="common-textarea form-control mt-5" id="mail" name="mail" placeholder="Adresse mail" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Adresse mail'"></textarea>

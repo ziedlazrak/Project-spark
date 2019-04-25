@@ -1,5 +1,7 @@
 <?PHP
 include "../config.php";
+session_start();
+
 
 
 class usersC {
@@ -51,6 +53,8 @@ function afficheruser ($users){
         }
 		
 	}
+
+    
 	
 	function afficherusers(){
 		//$sql="SElECT * From competition e inner join formationphp.competition a on e.cin= a.cin";
@@ -64,6 +68,331 @@ function afficheruser ($users){
             die('Erreur: '.$e->getMessage());
         }	
 	}
+
+
+    function select1(){
+        $sql="SELECT username From recentactivity where id=( SELECT max(id) FROM recentactivity) ";
+        $db = config::getConnexion();
+        try{
+        $liste=$db->query($sql);
+        return $liste;
+        }
+        catch (Exception $e){
+            die('Erreur: '.$e->getMessage());
+        }   
+    }
+
+
+        function select2(){
+        $sql="SELECT username From recentactivity ORDER BY id DESC LIMIT 1 OFFSET 1 ";
+        $db = config::getConnexion();
+        try{
+        $liste=$db->query($sql);
+        return $liste;
+        }
+        catch (Exception $e){
+            die('Erreur: '.$e->getMessage());
+        }   
+    }
+
+
+
+        function select3(){
+        $sql="SELECT username From recentactivity ORDER BY id DESC LIMIT 1 OFFSET 2 ";
+        $db = config::getConnexion();
+        try{
+        $liste=$db->query($sql);
+        return $liste;
+        }
+        catch (Exception $e){
+            die('Erreur: '.$e->getMessage());
+        }   
+    }
+
+
+
+        function select4(){
+        $sql="SELECT username From recentactivity ORDER BY id DESC LIMIT 1 OFFSET 3 ";
+        $db = config::getConnexion();
+        try{
+        $liste=$db->query($sql);
+        return $liste;
+        }
+        catch (Exception $e){
+            die('Erreur: '.$e->getMessage());
+        }   
+    }
+
+
+    function selectact1(){
+        $sql="SELECT activity From recentactivity where id=( SELECT max(id) FROM recentactivity) ";
+        $db = config::getConnexion();
+        try{
+        $liste=$db->query($sql);
+        return $liste;
+        }
+        catch (Exception $e){
+            die('Erreur: '.$e->getMessage());
+        }   
+    }
+
+
+        function selectact2(){
+        $sql="SELECT activity From recentactivity ORDER BY id DESC LIMIT 1 OFFSET 1 ";
+        $db = config::getConnexion();
+        try{
+        $liste=$db->query($sql);
+        return $liste;
+        }
+        catch (Exception $e){
+            die('Erreur: '.$e->getMessage());
+        }   
+    }
+
+
+
+        function selectact3(){
+        $sql="SELECT activity From recentactivity ORDER BY id DESC LIMIT 1 OFFSET 2 ";
+        $db = config::getConnexion();
+        try{
+        $liste=$db->query($sql);
+        return $liste;
+        }
+        catch (Exception $e){
+            die('Erreur: '.$e->getMessage());
+        }   
+    }
+
+
+
+        function selectact4(){
+        $sql="SELECT activity From recentactivity ORDER BY id DESC LIMIT 1 OFFSET 3 ";
+        $db = config::getConnexion();
+        try{
+        $liste=$db->query($sql);
+        return $liste;
+        }
+        catch (Exception $e){
+            die('Erreur: '.$e->getMessage());
+        }   
+    }
+
+
+    function selectdate1(){
+        $sql="SELECT created_at From recentactivity where id=( SELECT max(id) FROM recentactivity) ";
+        $db = config::getConnexion();
+        try{
+        $liste=$db->query($sql);
+        return $liste;
+        }
+        catch (Exception $e){
+            die('Erreur: '.$e->getMessage());
+        }   
+    }
+
+
+
+    function selectdate2(){
+        $sql="SELECT created_at From recentactivity ORDER BY id DESC LIMIT 1 OFFSET 1 ";
+        $db = config::getConnexion();
+        try{
+        $liste=$db->query($sql);
+        return $liste;
+        }
+        catch (Exception $e){
+            die('Erreur: '.$e->getMessage());
+        }   
+    }
+
+
+
+    function selectdate3(){
+        $sql="SELECT created_at From recentactivity ORDER BY id DESC LIMIT 1 OFFSET 2 ";
+        $db = config::getConnexion();
+        try{
+        $liste=$db->query($sql);
+        return $liste;
+        }
+        catch (Exception $e){
+            die('Erreur: '.$e->getMessage());
+        }   
+    }
+
+
+
+    function selectdate4(){
+        $sql="SELECT created_at From recentactivity ORDER BY id DESC LIMIT 1 OFFSET 3 ";
+        $db = config::getConnexion();
+        try{
+        $liste=$db->query($sql);
+        return $liste;
+        }
+        catch (Exception $e){
+            die('Erreur: '.$e->getMessage());
+        }   
+    }
+
+
+
+    function selectstat1(){
+        $sql="SELECT COUNT(DATE_FORMAT(created_at,'%d%m%y')) AS STUFF FROM users GROUP BY (DATE_FORMAT(created_at,'%d%m%y')) order by id DESC limit 1 OFFSET 10";
+        $db = config::getConnexion();
+        try{
+        $liste=$db->query($sql);
+        return $liste;
+        }
+        catch (Exception $e){
+            die('Erreur: '.$e->getMessage());
+        }   
+    }
+
+
+    function selectstat2(){
+        $sql="SELECT COUNT(DATE_FORMAT(created_at,'%d%m%y')) AS STUFF FROM users GROUP BY (DATE_FORMAT(created_at,'%d%m%y')) order by id DESC limit 1 OFFSET 9";
+        $db = config::getConnexion();
+        try{
+        $liste=$db->query($sql);
+        return $liste;
+        }
+        catch (Exception $e){
+            die('Erreur: '.$e->getMessage());
+        }   
+    }
+
+        function selectstat3(){
+        $sql="SELECT COUNT(DATE_FORMAT(created_at,'%d%m%y')) AS STUFF FROM users GROUP BY (DATE_FORMAT(created_at,'%d%m%y')) order by id DESC limit 1 OFFSET 8";
+        $db = config::getConnexion();
+        try{
+        $liste=$db->query($sql);
+        return $liste;
+        }
+        catch (Exception $e){
+            die('Erreur: '.$e->getMessage());
+        }   
+    }
+
+
+        function selectstat4(){
+        $sql="SELECT COUNT(DATE_FORMAT(created_at,'%d%m%y')) AS STUFF FROM users GROUP BY (DATE_FORMAT(created_at,'%d%m%y')) order by id DESC limit 1 OFFSET 7";
+        $db = config::getConnexion();
+        try{
+        $liste=$db->query($sql);
+        return $liste;
+        }
+        catch (Exception $e){
+            die('Erreur: '.$e->getMessage());
+        }   
+    }
+
+
+        function selectstat5(){
+        $sql="SELECT COUNT(DATE_FORMAT(created_at,'%d%m%y')) AS STUFF FROM users GROUP BY (DATE_FORMAT(created_at,'%d%m%y')) order by id DESC limit 1 OFFSET 6";
+        $db = config::getConnexion();
+        try{
+        $liste=$db->query($sql);
+        return $liste;
+        }
+        catch (Exception $e){
+            die('Erreur: '.$e->getMessage());
+        }   
+    }
+
+
+        function selectstat6(){
+        $sql="SELECT COUNT(DATE_FORMAT(created_at,'%d%m%y')) AS STUFF FROM users GROUP BY (DATE_FORMAT(created_at,'%d%m%y')) order by id DESC limit 1 OFFSET 5";
+        $db = config::getConnexion();
+        try{
+        $liste=$db->query($sql);
+        return $liste;
+        }
+        catch (Exception $e){
+            die('Erreur: '.$e->getMessage());
+        }   
+    }
+
+
+        function selectstat7(){
+        $sql="SELECT COUNT(DATE_FORMAT(created_at,'%d%m%y')) AS STUFF FROM users GROUP BY (DATE_FORMAT(created_at,'%d%m%y')) order by id DESC limit 1 OFFSET 4";
+        $db = config::getConnexion();
+        try{
+        $liste=$db->query($sql);
+        return $liste;
+        }
+        catch (Exception $e){
+            die('Erreur: '.$e->getMessage());
+        }   
+    }
+
+        function selectstat8(){
+        $sql="SELECT COUNT(DATE_FORMAT(created_at,'%d%m%y')) AS STUFF FROM users GROUP BY (DATE_FORMAT(created_at,'%d%m%y')) order by id DESC limit 1 OFFSET 3";
+        $db = config::getConnexion();
+        try{
+        $liste=$db->query($sql);
+        return $liste;
+        }
+        catch (Exception $e){
+            die('Erreur: '.$e->getMessage());
+        }   
+    }
+
+
+        function selectstat9(){
+        $sql="SELECT COUNT(DATE_FORMAT(created_at,'%d%m%y')) AS STUFF FROM users GROUP BY (DATE_FORMAT(created_at,'%d%m%y')) order by id DESC limit 1 OFFSET 2";
+        $db = config::getConnexion();
+        try{
+        $liste=$db->query($sql);
+        return $liste;
+        }
+        catch (Exception $e){
+            die('Erreur: '.$e->getMessage());
+        }   
+    }
+
+
+
+        function selectstat10(){
+        $sql="SELECT COUNT(DATE_FORMAT(created_at,'%d%m%y')) AS STUFF FROM users GROUP BY (DATE_FORMAT(created_at,'%d%m%y')) order by id DESC limit 1 OFFSET 1";
+        $db = config::getConnexion();
+        try{
+        $liste=$db->query($sql);
+        return $liste;
+        }
+        catch (Exception $e){
+            die('Erreur: '.$e->getMessage());
+        }   
+    }
+
+
+        function selectstat11(){
+        $sql="SELECT COUNT(DATE_FORMAT(created_at,'%d%m%y')) AS STUFF FROM users GROUP BY (DATE_FORMAT(created_at,'%d%m%y')) order by id DESC limit 1";
+        $db = config::getConnexion();
+        try{
+        $liste=$db->query($sql);
+        return $liste;
+        }
+        catch (Exception $e){
+            die('Erreur: '.$e->getMessage());
+        }   
+    }
+
+
+            function numbernotif($me){
+        $sql="SELECT COUNT(id) AS NUM FROM notifications where (`status` = 'unread') and (name='".$me."')";
+        $db = config::getConnexion();
+        try{
+        $liste=$db->query($sql);
+        return $liste;
+        }
+        catch (Exception $e){
+            die('Erreur: '.$e->getMessage());
+        }   
+    }
+
+
+
+
+
+
 
 
 	function supprimeruser($id){

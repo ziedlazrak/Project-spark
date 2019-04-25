@@ -1,5 +1,6 @@
 <?php
 	require_once "../config.php";
+	session_start();
 
 	if (isset($_SESSION['access_token']))
 		$gClient->setAccessToken($_SESSION['access_token']);

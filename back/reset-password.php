@@ -327,8 +327,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
           <p class="centered"><a href="profile.html"><img src="<?php echo 'images/' . $_SESSION["picture"] ?>" width="80" height="80" alt="" class="img-circle"></a></p>
-
-          <h5 class="centered">Admin</h5>
+          <h5 class="centered"><b><?php echo ($_SESSION["nom"]); ?></b></h5>
+          <h4><b><?php echo htmlspecialchars($_SESSION["email"]); ?></b></h4>
           <li class="mt">
             <a  href="index.php">
               <i class="fa fa-dashboard"></i>
